@@ -542,11 +542,17 @@ h1 span {
 
       unmuteButton.addEventListener("click", function () {
         if (player && typeof player.unMute === "function") {
+          player.seekTo(0, true);
           player.unMute();
           player.setVolume(100);
           player.playVideo();
         } else {
           const iframe = document.getElementById("crabRavePlayer");
+          iframe.contentWindow.postMessage(JSON.stringify({
+            event: "command",
+            func: "seekTo",
+            args: [0, true]
+          }), "*");
           iframe.contentWindow.postMessage(JSON.stringify({
             event: "command",
             func: "unMute",
