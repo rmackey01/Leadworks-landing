@@ -355,7 +355,7 @@
     function fill(el, ev) {
       setF(el, 'wd', ev.wdShort); setF(el, 'day', ev.dayNum); setF(el, 'mon', ev.monthShort); setF(el, 'time', ev.timeRange); setF(el, 'title', ev.e.title); setF(el, 'where', ev.e.where);
       setF(el, 'nextline', 'Next up · ' + ev.timeRange); setF(el, 'timecat', ev.timeRange + ' · ' + ev.e.cat); setF(el, 'wherecat', ev.e.where + ' · ' + ev.e.cat); setF(el, 'catdot', '· ' + ev.e.cat);
-      $$('[data-f="img"]', el).forEach(function (im) { if (ev.e.img) { im.src = ev.e.img; im.removeAttribute('srcset'); im.removeAttribute('sizes'); } });
+      $$('img', el).forEach(function (im) { if (ev.e.img) { im.src = ev.e.img; im.removeAttribute('srcset'); im.removeAttribute('sizes'); } });
       $$('[data-pcv="add"]', el).forEach(function (add) { add.setAttribute('aria-label', 'Add ' + ev.e.title + ' to calendar'); add.onclick = function (x) { x.preventDefault(); openCal(ev); }; });
     }
 
