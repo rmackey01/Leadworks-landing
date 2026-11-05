@@ -139,7 +139,7 @@
 
   // ---------- food: fair order ----------
   var food = pcv('food');
-  if (food) shuffle(pcvs('food-card', food)).forEach(function (c) { food.appendChild(c); });
+  if (food) { shuffle(pcvs('food-card', food)).forEach(function (c) { food.appendChild(c); }); food.scrollLeft = 0; requestAnimationFrame(function () { food.scrollLeft = 0; }); }
 
   // ---------- accordions (directory + footer) ----------
   pcvs('acc').forEach(function (acc) {
