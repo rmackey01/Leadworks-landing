@@ -130,7 +130,18 @@
     pcvs('close-cal').forEach(function (b) { b.addEventListener('click', function () { hide('cal'); }); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') ['menu', 'parking', 'cal'].forEach(function (n) { if (isOpen(n)) hide(n); }); });
 
-    // ---------- mobile glass nav: clear over the hero, then hides on scroll down / returns on scroll up ----------
+    // ---------- desktop in-page links: smooth scroll that clears the fixed nav (instead of Webflow's default) ----------
+    if (desk) $$('a[href^="#"]:not([data-btn])', R).forEach(function (a) {
+      var id = a.getAttribute('href').slice(1); if (!id) return;
+      a.addEventListener('click', function (e) {
+        var t = document.getElementById(id); if (!t) return;
+        e.preventDefault(); e.stopPropagation();
+        t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        try { history.pushState(null, '', '#' + id); } catch (x) {}
+      });
+    });
+
+    // ---------- mobile glass nav:clear over the hero, then hides on scroll down / returns on scroll up ----------
     var nav = pcv('nav'), bar = pcv('nav-bar'), hero = $('section', R);
     var navShown = true, navSolid = false, lastY = 0;
     function paintNav() {
